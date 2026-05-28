@@ -10,7 +10,7 @@ import Project5Hero from './components/Project5Hero'
 import Project6Hero from './components/Project6Hero'
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'projects' | 'summary' | 'project-1' | 'project-2' | 'project-3' | 'project-4' | 'project-5' | 'project-6'>('summary');
+  const [currentPage, setCurrentPage] = useState<'home' | 'projects' | 'summary' | 'project-1' | 'project-2' | 'project-3' | 'project-4' | 'project-5' | 'project-6'>('home');
 
   return (
     <main className="min-h-screen bg-[#f0f0f0]">
