@@ -331,13 +331,13 @@ export default function Project5Hero({ onBack, onNavigateHome, onNavigateProject
                         </p>
                       </div>
 
-                      {/* Large Image Placeholder */}
-                      <div className="w-full">
-                        <div className="w-full border border-[#3E4450]/20 bg-white/20 rounded-xl overflow-hidden shadow-lg flex items-center justify-center relative group/img">
+                      {/* Large Image Showcase - Fitted and Center aligned */}
+                      <div className="w-full flex justify-center">
+                        <div className="w-full max-w-2xl h-[600px] sm:h-[700px] border border-[#3E4450]/20 bg-white/20 rounded-2xl overflow-hidden shadow-lg flex items-center justify-center relative group/img">
                           <img 
                             src={minhchunginforgraphic} 
                             alt="Bản thiết kế Infographic đầy đủ" 
-                            className="w-full h-auto object-contain transition-transform duration-500 group-hover/img:scale-105"
+                            className="w-full h-full object-contain p-2 sm:p-4 transition-transform duration-500 group-hover/img:scale-[1.01]"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-end p-6">
                             <span className="text-white text-sm font-bold tracking-wider uppercase">Sản phẩm Infographic Hoàn thiện</span>
