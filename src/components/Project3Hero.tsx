@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { 
   Sparkles, ChevronRight, ArrowUpRight, BookOpen, Lightbulb, 
   HelpCircle, Zap, UserCheck, Layout, Users, Copy, GitCommit 
-} from 'lucide-react';
+, FileText, FolderTree} from 'lucide-react';
 import { motion } from 'motion/react';
 import BottomLeftCard from './BottomLeftCard';
 
@@ -116,7 +116,7 @@ const principlesData = [
 ];
 
 export default function Project3Hero({ onBack, onNavigateHome, onNavigateProjects, onNavigateSummary, onNavigateNext }: { onBack: () => void, onNavigateHome?: () => void, onNavigateProjects?: () => void, onNavigateSummary?: () => void, onNavigateNext?: () => void }) {
-  const [activeTab, setActiveTab] = useState<number>(1);
+  const [activeTaskTab, setActiveTaskTab] = useState<number>(1);
 
   const renderPrincipleIcon = (name: string) => {
     switch (name) {
@@ -187,6 +187,18 @@ export default function Project3Hero({ onBack, onNavigateHome, onNavigateProject
                     Trình bày sự so sánh giữa Prompt ban đầu và Prompt cải tiến cùng kết quả đầu ra từ AI.
                   </p>
                 </div>
+                {/* Tabs/Actions */}
+                <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+                  <div className="flex items-center bg-white/40 border border-white/40 rounded-xl p-1 shadow-sm">
+                    <div className="flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm bg-white/60 text-[#3E4450] font-bold shadow-sm">
+                      <FileText className="w-4 h-4" />
+                      <span>Báo cáo</span>
+                    </div>
+                  </div>
+                  <button className="flex items-center justify-center p-2.5 sm:p-3 bg-white/40 border border-white/40 rounded-xl text-[#3E4450] hover:text-[#3E4450] hover:bg-white/60 shadow-sm transition-colors">
+                    <FolderTree className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
 
               <div className="w-full h-[1px] bg-[#3E4450]/20 mb-8 sm:mb-10"></div>
@@ -207,9 +219,9 @@ export default function Project3Hero({ onBack, onNavigateHome, onNavigateProject
                   {tasksData.map((task) => (
                     <button
                       key={task.id}
-                      onClick={() => setActiveTab(task.id)}
+                      onClick={() => setActiveTaskTab(task.id)}
                       className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
-                        activeTab === task.id
+                        activeTaskTab === task.id
                           ? 'bg-[#3E4450] text-white shadow-lg shadow-[#3E4450]/20 scale-105'
                           : 'text-[#3E4450] hover:bg-white/20 hover:text-[#3E4450]'
                       }`}
@@ -221,9 +233,9 @@ export default function Project3Hero({ onBack, onNavigateHome, onNavigateProject
                     </button>
                   ))}
                   <button
-                    onClick={() => setActiveTab(4)}
+                    onClick={() => setActiveTaskTab(4)}
                     className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
-                      activeTab === 4
+                      activeTaskTab === 4
                         ? 'bg-[#3E4450] text-white shadow-lg shadow-[#3E4450]/20 scale-105'
                         : 'text-[#3E4450] hover:bg-white/20 hover:text-[#3E4450]'
                     }`}
@@ -236,14 +248,14 @@ export default function Project3Hero({ onBack, onNavigateHome, onNavigateProject
                 {/* Content Area */}
                 <div className="w-full">
                   {tasksData.map((task) => {
-                    if (activeTab !== 4 && activeTab !== task.id) return null;
+                    if (activeTaskTab !== 4 && activeTaskTab !== task.id) return null;
                     return (
                       <motion.div
                         key={task.id}
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4 }}
-                        className={`w-full mb-10 ${activeTab === 4 ? 'border-b border-white/20 pb-10 last:border-b-0 last:pb-0' : ''}`}
+                        className={`w-full mb-10 ${activeTaskTab === 4 ? 'border-b border-white/20 pb-10 last:border-b-0 last:pb-0' : ''}`}
                       >
                         {/* Task Title Banner */}
                         <div className="bg-white/20 border border-white/30 rounded-2xl p-5 mb-6 shadow-sm">

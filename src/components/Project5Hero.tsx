@@ -1,6 +1,6 @@
 import { 
   ChevronRight, ArrowUpRight, User, IdCard, BookOpen, Sparkles, 
-  Brain, CheckCircle2, AlertTriangle, Globe
+  Brain, CheckCircle2, AlertTriangle, Globe, FileText, FolderTree
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import BottomLeftCard from './BottomLeftCard';
@@ -67,6 +67,18 @@ export default function Project5Hero({ onBack, onNavigateHome, onNavigateProject
                   <p className="text-[#3E4450] opacity-80 italic text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl font-medium">
                     Trưng bày sản phẩm nội dung số hoàn thiện (hình ảnh, video hoặc bài viết) được hỗ trợ bởi AI.
                   </p>
+                </div>
+                {/* Tabs/Actions */}
+                <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+                  <div className="flex items-center bg-white/40 border border-white/40 rounded-xl p-1 shadow-sm">
+                    <div className="flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm bg-white/60 text-[#3E4450] font-bold shadow-sm">
+                      <FileText className="w-4 h-4" />
+                      <span>Báo cáo</span>
+                    </div>
+                  </div>
+                  <button className="flex items-center justify-center p-2.5 sm:p-3 bg-white/40 border border-white/40 rounded-xl text-[#3E4450] hover:text-[#3E4450] hover:bg-white/60 shadow-sm transition-colors">
+                    <FolderTree className="w-5 h-5" />
+                  </button>
                 </div>
               </div>
 

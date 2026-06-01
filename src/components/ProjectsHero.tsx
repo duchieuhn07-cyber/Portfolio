@@ -21,7 +21,7 @@ const projects = [
   {
     icon: <Users className="w-5 h-5 text-gray-200" />,
     title: "Bài 4: Sử dụng công cụ hợp tác trực tuyến cho dự án nhóm",
-    desc: "Trình bày minh chứng về việc sử dụng công cụ quản lý dự án nhóm và cách thức phối hợp trực tuyến."
+    desc: "Trình bày bài làm về việc sử dụng công cụ quản lý dự án nhóm và cách thức phối hợp trực tuyến."
   },
   {
     icon: <Wand2 className="w-5 h-5 text-gray-200" />,

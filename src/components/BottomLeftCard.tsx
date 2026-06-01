@@ -10,7 +10,7 @@ export default function BottomLeftCard() {
       className="absolute z-20 bottom-28 right-4 left-auto md:left-6 md:right-auto md:bottom-6 lg:bottom-10 lg:left-10 p-3 md:p-4 lg:p-5 rounded-[1.2rem] md:rounded-[1.5rem] lg:rounded-[2.2rem] bg-white/30 backdrop-blur-xl flex flex-col gap-2 lg:gap-3 min-w-[140px] md:min-w-[150px] lg:min-w-[180px] w-fit shadow-lg"
     >
       <div className="flex flex-col">
-        <span className="text-lg md:text-xl font-bold text-[rgba(62,68,80,0.9)] tracking-tight">File minh chứng</span>
+        <span className="text-lg md:text-xl font-bold text-[rgba(62,68,80,0.9)] tracking-tight">File bài làm</span>
       </div>
       <motion.a
         href="https://drive.google.com/drive/folders/1IAB1ugcXGkqYZ7ufBZ9MpIN8L6_mQ8sM?usp=sharing"

@@ -1,8 +1,11 @@
-import { ChevronRight, ArrowUpRight } from 'lucide-react';
+import { useState } from 'react';
+import { ChevronRight, ArrowUpRight, FileText, Image as ImageIcon, FolderTree, Search, Sparkles, Globe } from 'lucide-react';
 import { motion } from 'motion/react';
 import BottomLeftCard from './BottomLeftCard';
 
 export default function Project2Hero({ onBack, onNavigateHome, onNavigateProjects, onNavigateSummary, onNavigateNext }: { onBack: () => void, onNavigateHome?: () => void, onNavigateProjects?: () => void, onNavigateSummary?: () => void, onNavigateNext?: () => void }) {
+  const [activeTab, setActiveTab] = useState<'baocao' | 'bailam'>('baocao');
+  const [selectedQuery, setSelectedQuery] = useState(1);
   return (
     <div className="w-full h-screen flex items-center justify-center p-3 md:p-5 bg-[#f0f0f0]">
       <section className="relative w-full max-w-[1536px] h-full rounded-[1.5rem] md:rounded-[3rem] overflow-hidden shadow-none flex flex-col items-center bg-white/10 group">
@@ -61,12 +64,43 @@ export default function Project2Hero({ onBack, onNavigateHome, onNavigateProject
                     Trình bày kết quả tìm kiếm học thuật bằng các toán tử nâng cao và bảng đánh giá nguồn tin đã thực hiện.
                   </p>
                 </div>
+                {/* Tabs/Actions */}
+                <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+                  <div className="flex items-center bg-white/40 border border-white/40 rounded-xl p-1 shadow-sm">
+                    <button 
+                      onClick={() => setActiveTab('baocao')}
+                      className={`flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm transition-colors ${
+                        activeTab === 'baocao' 
+                          ? 'bg-white/60 text-[#3E4450] font-bold shadow-sm' 
+                          : 'text-[#3E4450] hover:text-[#3E4450] hover:bg-white/50 font-semibold'
+                      }`}
+                    >
+                      <FileText className="w-4 h-4" />
+                      <span>Trình bày</span>
+                    </button>
+                    <button 
+                      onClick={() => setActiveTab('bailam')}
+                      className={`flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm transition-colors ${
+                        activeTab === 'bailam' 
+                          ? 'bg-white/60 text-[#3E4450] font-bold shadow-sm' 
+                          : 'text-[#3E4450] hover:text-[#3E4450] hover:bg-white/50 font-semibold'
+                      }`}
+                    >
+                      <ImageIcon className="w-4 h-4" />
+                      <span>Báo cáo</span>
+                    </button>
+                  </div>
+                  <button className="flex items-center justify-center p-2.5 sm:p-3 bg-white/40 border border-white/40 rounded-xl text-[#3E4450] hover:text-[#3E4450] hover:bg-white/60 shadow-sm transition-colors">
+                    <FolderTree className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
 
               <div className="w-full h-[1px] bg-[#3E4450]/20 mb-8 sm:mb-10"></div>
 
               {/* Body Section - Báo cáo */}
               <div className="flex-1 flex flex-col w-full relative">
+                {activeTab === 'bailam' ? ( <>
                 <div className="w-full mt-2 sm:mt-4 rounded-2xl border-2 border-white/50 shadow-xl bg-white/20 p-6 md:p-10 flex flex-col text-left overflow-y-auto">
                   
                   <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#3E4450] mb-2 text-center uppercase tracking-wide">Báo cáo tổng hợp và đánh giá nguồn tài liệu</h2>
@@ -211,6 +245,170 @@ export default function Project2Hero({ onBack, onNavigateHome, onNavigateProject
                     <li>Pankove, J.I., 1971. <em>Optical processes in semiconductors</em>. New York: Courier Corporation.</li>
                   </ul>
                 </div>
+                              </> ) : (
+                <div className="w-full mt-2 sm:mt-4 rounded-2xl border-2 border-white/50 shadow-xl bg-white/20 p-6 md:p-10 flex flex-col text-left overflow-y-auto">
+                  {/* Section Title */}
+                  <div className="flex items-center gap-3 mb-6 bg-white/10 px-4 py-2.5 rounded-xl border border-white/20 w-fit">
+                    <Sparkles className="w-5 h-5 text-amber-500 animate-pulse animate-duration-1000" />
+                    <span className="text-sm font-bold text-[#3E4450] uppercase tracking-wider">
+                      Trình mô phỏng Tìm kiếm Học thuật nâng cao
+                    </span>
+                  </div>
+
+                  <p className="text-sm sm:text-base text-[#3E4450] font-semibold leading-relaxed mb-6 text-justify">
+                    Để thu thập dữ liệu uy tín cho bài báo cáo, em đã thực hành sử dụng các **toán tử tìm kiếm nâng cao (Advanced Search Operators)** trên Google Scholar, ScienceDirect và các cơ sở dữ liệu lớn. Hãy chọn một truy vấn nâng cao dưới đây để xem kết quả mô phỏng thực tế:
+                  </p>
+
+                  {/* Query Tabs/Buttons */}
+                  <div className="flex flex-wrap gap-2.5 mb-6">
+                    {[
+                      { id: 1, label: 'Truy vấn 1 (AND + site:)', desc: 'Tìm tài liệu 2D bán dẫn trên ScienceDirect' },
+                      { id: 2, label: 'Truy vấn 2 (OR + filetype:)', desc: 'Tìm file PDF tổng hợp Quang điện tử' },
+                      { id: 3, label: 'Truy vấn 3 (author: + AND)', desc: 'Tìm sách giáo trình của Giáo sư Chuang' },
+                    ].map((q) => (
+                      <button
+                        key={q.id}
+                        type="button"
+                        onClick={() => setSelectedQuery(q.id)}
+                        className={`flex-1 min-w-[200px] text-left p-3.5 rounded-xl border-2 transition-all duration-300 ${
+                          selectedQuery === q.id
+                            ? 'bg-white/70 border-[#3E4450] shadow-md scale-[1.01]'
+                            : 'bg-white/20 border-white/30 hover:bg-white/40 hover:border-white/50'
+                        }`}
+                      >
+                        <h4 className="text-xs font-black text-[#3E4450] uppercase tracking-wider mb-1">{q.label}</h4>
+                        <p className="text-[11px] sm:text-xs text-[#3E4450]/80 font-medium leading-tight">{q.desc}</p>
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Mock Google Scholar Console */}
+                  <div className="w-full bg-[#f8fafc]/90 border-2 border-white/80 rounded-2xl shadow-lg p-4 sm:p-6 mb-4 flex flex-col font-sans">
+                    {/* Header: Mock Search Input Box */}
+                    <div className="flex items-center gap-2.5 bg-white border-2 border-slate-200 rounded-full px-4 sm:px-6 py-2.5 shadow-sm max-w-4xl w-full mb-6 mx-auto group focus-within:border-sky-500 focus-within:shadow-md transition-all">
+                      <Search className="w-5 h-5 text-slate-400 group-focus-within:text-sky-500" />
+                      <input
+                        type="text"
+                        readOnly
+                        value={
+                          selectedQuery === 1
+                            ? '"optical properties of semiconductors" AND "2D materials" site:sciencedirect.com'
+                            : selectedQuery === 2
+                            ? '"semiconductor optoelectronics" OR "quang điện tử bán dẫn" filetype:pdf'
+                            : '"physics of optoelectronic devices" AND author:"Chuang"'
+                        }
+                        className="flex-grow bg-transparent border-none outline-none font-medium text-xs sm:text-sm text-slate-800"
+                      />
+                      <Globe className="w-4 h-4 text-slate-400" />
+                    </div>
+
+                    {/* Results Count Info */}
+                    <div className="text-slate-500 text-xs mb-5 pl-2 font-medium">
+                      Khoảng {selectedQuery === 1 ? '5,430' : selectedQuery === 2 ? '1,890' : '982'} kết quả học thuật được tìm thấy (0.04 giây)
+                    </div>
+
+                    {/* Scholar Results Container */}
+                    <div className="space-y-6">
+                      {selectedQuery === 1 && (
+                        <>
+                          {/* Result 1 */}
+                          <div className="pl-2 pr-2 text-left">
+                            <h3 className="text-base sm:text-lg text-sky-850 hover:text-sky-950 font-medium hover:underline cursor-pointer flex items-center gap-1.5 leading-snug">
+                              <span>[HTML] Photonics and optoelectronics of 2D semiconductor transition metal dichalcogenides</span>
+                              <ArrowUpRight className="w-4 h-4 text-sky-800 shrink-0" />
+                            </h3>
+                            <div className="text-emerald-700 text-xs font-medium my-1">
+                              KF Mak, J Shan - Nature Photonics, 2016 - nature.com
+                            </div>
+                            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed text-justify">
+                              Two-dimensional transition metal dichalcogenides (TMDs) have emerged as a highly attractive class of semiconductor materials for optoelectronic applications. We review the optical properties of monolayer and...
+                            </p>
+                            <div className="text-slate-400 text-xs mt-1.5 hover:text-slate-500 cursor-pointer">
+                              Cited by 5,432 - Related articles - All 12 versions
+                            </div>
+                          </div>
+
+                          {/* Result 2 */}
+                          <div className="pl-2 pr-2 text-left border-t border-slate-200/60 pt-5">
+                            <h3 className="text-base sm:text-lg text-sky-855 hover:text-sky-955 font-medium hover:underline cursor-pointer flex items-center gap-1.5 leading-snug">
+                              <span>Single-layer MoS2: a new direct-gap semiconductor</span>
+                              <ArrowUpRight className="w-4 h-4 text-sky-800 shrink-0" />
+                            </h3>
+                            <div className="text-emerald-700 text-xs font-medium my-1">
+                              KF Mak, C Lee, J Hone, J Shan - Physical Review Letters, 2010 - journals.aps.org
+                            </div>
+                            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed text-justify">
+                              We report that monolayer MoS2, unlike bulk MoS2, is a direct-gap semiconductor exhibiting a strong photoluminescence enhancement. This transition from indirect to direct gap arises from...
+                            </p>
+                            <div className="text-slate-400 text-xs mt-1.5 hover:text-slate-500 cursor-pointer">
+                              Cited by 12,431 - Related articles - All 15 versions
+                            </div>
+                          </div>
+                        </>
+                      )}
+
+                      {selectedQuery === 2 && (
+                        <>
+                          {/* Result 1 */}
+                          <div className="pl-2 pr-2 text-left">
+                            <h3 className="text-base sm:text-lg text-sky-850 hover:text-sky-955 font-medium hover:underline cursor-pointer flex items-center gap-1.5 leading-snug">
+                              <span>[PDF] Emerging device applications for semiconducting 2D transition metal dichalcogenides</span>
+                              <ArrowUpRight className="w-4 h-4 text-sky-800 shrink-0" />
+                            </h3>
+                            <div className="text-emerald-700 text-xs font-medium my-1">
+                              D Jariwala, VK Sangwan, LJ Lauhon... - ACS Nano, 2014 - pubs.acs.org
+                            </div>
+                            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed text-justify">
+                              Transition metal dichalcogenides (TMDs) exhibit unique electrical and optical properties that differ significantly from their bulk counterparts, making them suitable for electronic and semiconductor optoelectronics...
+                            </p>
+                            <div className="text-slate-400 text-xs mt-1.5 hover:text-slate-500 cursor-pointer">
+                              Cited by 3,821 - Related articles - All 8 versions
+                            </div>
+                          </div>
+
+                          {/* Result 2 */}
+                          <div className="pl-2 pr-2 text-left border-t border-slate-200/60 pt-5">
+                            <h3 className="text-base sm:text-lg text-sky-850 hover:text-sky-955 font-medium hover:underline cursor-pointer flex items-center gap-1.5 leading-snug">
+                              <span>Tính chất quang của vật liệu bán dẫn cấu trúc nano ứng dụng trong cảm biến quang</span>
+                              <ArrowUpRight className="w-4 h-4 text-sky-800 shrink-0" />
+                            </h3>
+                            <div className="text-emerald-700 text-xs font-medium my-1">
+                              TH Nguyen, VA Tran, HM Le... - Tạp chí Khoa học ĐHQGHN, 2021 - js.vnu.edu.vn
+                            </div>
+                            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed text-justify">
+                              Bài báo này tổng hợp tính chất quang (hấp thụ, bức xạ, quang phát quang) của vật liệu bán dẫn nano (chấm lượng tử, dây bán dẫn) phục vụ cho bối cảnh phát triển quang điện tử bán dẫn trong nước hiện nay...
+                            </p>
+                            <div className="text-slate-400 text-xs mt-1.5 hover:text-slate-500 cursor-pointer">
+                              Cited by 45 - Related articles - All 4 versions
+                            </div>
+                          </div>
+                        </>
+                      )}
+
+                      {selectedQuery === 3 && (
+                        <>
+                          {/* Result 1 */}
+                          <div className="pl-2 pr-2 text-left">
+                            <h3 className="text-base sm:text-lg text-sky-850 hover:text-sky-955 font-medium hover:underline cursor-pointer flex items-center gap-1.5 leading-snug">
+                              <span>Physics of optoelectronic devices</span>
+                              <ArrowUpRight className="w-4 h-4 text-sky-800 shrink-0" />
+                            </h3>
+                            <div className="text-emerald-700 text-xs font-medium my-1">
+                              SL Chuang - 2012 - books.google.com
+                            </div>
+                            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed text-justify">
+                              A comprehensive textbook covering the physics of semiconductor optoelectronics, optical properties, quantum mechanics, and electro-optical modulation. This book is widely recognized as a foundational work...
+                            </p>
+                            <div className="text-slate-400 text-xs mt-1.5 hover:text-slate-500 cursor-pointer">
+                              Cited by 4,120 - Related articles - All 6 versions
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                )}
               </div>
             </motion.div>
           </div>
